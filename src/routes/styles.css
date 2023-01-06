@@ -1,0 +1,151 @@
+body {
+	background-color: rgba(21, 13, 51, 0.932);
+	margin: 0;
+	padding: 0;
+	font-family: monospace;
+}
+header {
+	font-family: 'scrypta';
+	color: rgb(53, 187, 204);
+	font-size: large;
+	display: flex;
+	background-image: linear-gradient(
+		to bottom right,
+		rgba(207, 10, 207, 0.95),
+		rgba(86, 3, 219, 0.863)
+	);
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 50px;
+}
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Source+Sans+Pro:wght@300&display=swap');
+
+:global(*) {
+	font-family: 'Roboto', sans-serif;
+}
+
+@font-face {
+	font-family: 'scrypta';
+	src: url(/src/routes/ScryptaPersonalUseBoldItalic-X3eoP.ttf);
+}
+li {
+	text-decoration: none;
+}
+header a {
+	display: flex;
+	text-decoration: none;
+	font-family: 'Roboto', sans-serif;
+	margin-top: 10px;
+	text-align: right;
+	align-items: center;
+	justify-content: space-between;
+	color: rgb(53, 187, 204);
+	margin-left: 5px;
+	margin-right: 5px;
+	padding-left: 5px;
+}
+button {
+	background-color: rgba(21, 13, 51, 0.932);
+	color: white;
+	width: 100px;
+	font-family: 'Roboto', sans-serif;
+	height: 40px;
+	border-radius: 20px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+.clr {
+	clear: both;
+}
+.token {
+	border: 1px solid black;
+	width: 85%;
+	justify-content: center;
+	margin: auto;
+}
+.links {
+	display: flex;
+	align-items: center;
+	justify-content: right;
+}
+
+#wallet-info {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#swapCard {
+	background-image: linear-gradient(
+		to bottom right,
+		rgba(207, 10, 207, 0.95),
+		rgba(86, 3, 219, 0.863)
+	);
+	font-size: large;
+	margin: auto;
+	width: 450px;
+	border: 2px solid rgb(55, 187, 204);
+	border-radius: 20px;
+}
+
+#swapTitle {
+	/* color: white; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin: auto;
+}
+#swap {
+	color: rgb(55, 187, 204);
+	padding-left: 60px;
+	font-family: 'scrypta';
+	font-size: x-large;
+	text-align: center;
+	width: 100%;
+	margin: auto;
+}
+#swapContents {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	/* width: 100%; */
+}
+#settingsIcon {
+	/* float: right; */
+	background-color: darkviolet;
+}
+
+#searchBar {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 30%;
+}
+
+#tokenMenu {
+	background-color: antiquewhite;
+	height: 200px;
+	width: 85%;
+	overflow-y: auto;
+	list-style: none;
+}
+#tokenMenu a {
+	font-color: black;
+	width: 100%;
+	text-decoration: none;
+	display: block;
+	padding-left: 5px;
+}
+#tokenMenu a:hover {
+	background-color: #ccc;
+}
