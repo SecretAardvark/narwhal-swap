@@ -1,5 +1,4 @@
 <script>
-	import { each } from 'svelte/internal';
 	import './tokenDisplay.svelte';
 	import TokenDisplay from './tokenDisplay.svelte';
 
@@ -7,11 +6,9 @@
 	let tokenTwo;
 
 	const switchToken = () => {
-		let tokenOneVal = tokenOne;
-		let tokenTwoVal = tokenTwo;
-
-		tokenOne = tokenTwoVal;
-		tokenTwo = tokenOneVal;
+		let temp = tokenOne;
+		tokenOne = tokenTwo;
+		tokenTwo = temp;
 	};
 </script>
 
@@ -25,12 +22,14 @@
 			<p id="settingsIcon">{'<settings icon>'}</p>
 		</div>
 		<div id="swapContents">
-			<TokenDisplay bind:token={tokenOne} id="displayOne" />
+			<TokenDisplay bind:currentToken={tokenOne} />
+
 			<div on:click={() => switchToken()}>to:</div>
-			<TokenDisplay bind:token={tokenTwo} id="displayTwo" />
+
+			<TokenDisplay bind:currentToken={tokenTwo} />
 
 			<br />
-			<button id="swapButton" on:click={() => alert(`swapped ${tokenOne} for ${tokenTwo}`)}
+			<button on:click={() => alert(`swapped ${tokenOne} for ${tokenTwo}`)} id="swapButton"
 				>swap</button
 			>
 		</div>
@@ -38,32 +37,58 @@
 </main>
 
 <style>
-	/* main {
-		display: flex;
-		align-items: center;
-		justify-content: center;
+	.clr {
+		clear: both;
 	}
+
 	#swapCard {
+		background-image: linear-gradient(
+			to bottom right,
+			rgba(207, 10, 207, 0.95),
+			rgba(86, 3, 219, 0.863)
+		);
+		background-color: rgba(21, 13, 51, 0.932);
+
+		font-size: large;
 		margin: auto;
 		width: 450px;
-		border: 3px solid black;
+		display: flex;
+		flex-direction: column;
+		z-index: 7;
+		border-radius: 20px;
 	}
-	.token {
-		border: 3px solid black;
-		width: 85%;
-		/* justify-content: center; 
-		margin: auto;
+
+	#swapCard:hover {
+		border: 2px solid rgb(55, 187, 204);
 	}
 	#swapTitle {
+		/* color: white; */
 		display: flex;
-		justify-content: end;
+		justify-content: center;
+		align-items: center;
 		width: 100%;
 		margin: auto;
 	}
 	#swap {
-		text-align: left;
+		color: rgb(55, 187, 204);
+		padding-left: 60px;
+		font-family: 'scrypta';
+		font-size: x-large;
+		text-align: center;
+		width: 100%;
+		margin: auto;
+	}
+	#swapContents {
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		justify-content: space-evenly;
+		align-items: center;
+		z-index: 8;
+		/* width: 100%; */
 	}
 	#settingsIcon {
-		float: right;
-	} */
+		/* float: right; */
+		background-color: darkviolet;
+	}
 </style>

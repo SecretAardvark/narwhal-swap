@@ -24,24 +24,49 @@
 </main>
 
 <style>
-	/* a {
-		color: white;
-		margin-top: 30px;
-		margin-left: 5 px;
+	header {
+		font-family: 'scrypta';
+		color: rgb(53, 187, 204);
+		font-size: large;
+		display: flex;
+
+		background-image: linear-gradient(
+			to bottom right,
+			rgba(207, 10, 207, 0.95),
+			rgba(86, 3, 219, 0.863)
+		);
+		justify-content: space-between;
+		align-items: center;
+		padding: 10px;
+		margin-bottom: 10px;
+	}
+	header a {
+		display: flex;
+		text-decoration: none;
+		font-family: 'Roboto', sans-serif;
+		margin-top: 10px;
+		text-align: right;
+		align-items: center;
+		justify-content: space-between;
+		color: rgb(53, 187, 204);
+		margin-left: 5px;
 		margin-right: 5px;
 		padding-left: 5px;
 	}
-	header {
-		display: flex;
-		background-color: rgb(207, 10, 207);
-		justify-content: space-between;
-	}
 	.links {
 		display: flex;
-		text-align: right;
-		justify-content: space-between;
+		align-items: center;
+		justify-content: right;
 	}
 	#wallet-info {
-		justify-content: space-between;
-	} */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	#searchBar {
+		margin-top: 20px;
+		margin-bottom: 20px;
+		width: 30%;
+	}
 </style>
