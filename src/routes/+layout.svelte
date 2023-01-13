@@ -1,5 +1,8 @@
 <script src>
 	let title = 'Narwal Swap';
+
+	//TODO: Style popup token menu
+	//TODO: make outer tokenInput div border highlight when inner # input selected
 </script>
 
 <link rel="stylesheet" href="src\routes\styles.css" />
@@ -68,5 +71,8 @@
 		margin-top: 20px;
 		margin-bottom: 20px;
 		width: 30%;
+	}
+	#networkDisplay {
+		margin-left: 5px;
 	}
 </style>

@@ -1,14 +1,27 @@
 <script>
+	// @ts-nocheck
+
 	import './tokenDisplay.svelte';
 	import TokenDisplay from './tokenDisplay.svelte';
 
 	let tokenOne;
 	let tokenTwo;
 
+	let tokenOneAmount;
+	let tokenTwoAmount;
+
 	const switchToken = () => {
 		let temp = tokenOne;
 		tokenOne = tokenTwo;
 		tokenTwo = temp;
+	};
+
+	const fakeSwap = () => {
+		if (tokenOne == 'Select Token' || tokenTwo == 'Select Token') {
+			alert('Select token first');
+		} else {
+			alert(`Swapped ${tokenOneAmount} ${tokenOne} for ${tokenTwoAmount} ${tokenTwo}`);
+		}
 	};
 </script>
 
@@ -22,15 +35,18 @@
 			<p id="settingsIcon">{'<settings icon>'}</p>
 		</div>
 		<div id="swapContents">
-			<TokenDisplay bind:currentToken={tokenOne} />
+			<TokenDisplay bind:currentToken={tokenOne} bind:amount={tokenOneAmount} id="amount1" />
 
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div on:click={() => switchToken()}>to:</div>
 
-			<TokenDisplay bind:currentToken={tokenTwo} />
+			<TokenDisplay bind:currentToken={tokenTwo} bind:amount={tokenTwoAmount} id="amount2" />
 
 			<br />
-			<button on:click={() => alert(`swapped ${tokenOne} for ${tokenTwo}`)} id="swapButton"
-				>swap</button
+			<button on:click={() => fakeSwap()}
+				>{tokenOne === 'Select Token' || tokenTwo === 'Select Token'
+					? 'Select a token'
+					: 'Swap'}</button
 			>
 		</div>
 	</div>
@@ -59,7 +75,7 @@
 	}
 
 	#swapCard:hover {
-		border: 2px solid rgb(55, 187, 204);
+		/* border: 2px solid rgb(55, 187, 204); */
 	}
 	#swapTitle {
 		/* color: white; */
