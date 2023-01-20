@@ -2,8 +2,7 @@
 	// @ts-nocheck
 
 	let menuOpen = false;
-	//might need this to fix the border issue?
-	// let focused = false;
+	let focused = false;
 
 	let tokenList = [
 		{ name: 'Yada Yada token', price: 100 },
@@ -41,8 +40,22 @@
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-<div class="tokenInput" tabindex="0">
-	<input type="number" {id} class="amount" on:input={() => setAmount()} />
+<div
+	class={focused ? 'tokenInput focus' : 'tokenInput'}
+	tabindex="0"
+	on:focus={() => {
+		focused = !focused;
+	}}
+>
+	<input
+		type="number"
+		{id}
+		class="amount"
+		on:input={() => setAmount()}
+		on:click={() => {
+			focused = !focused;
+		}}
+	/>
 
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
@@ -57,29 +70,35 @@
 
 {#if menuOpen}
 	<div class="tokenMenu">
-		{#each tokenList as menuItem}
-			<a href="#" on:click={() => setToken(menuItem)}>{menuItem.name}</a>
-		{/each}
+		<div class="menuBar">
+			<p>Select a token</p>
+			<a href="#" id="closeButton" on:click={() => (menuOpen = !menuOpen)}>x</a>
+		</div>
+		<div class="tokenList">
+			{#each tokenList as menuItem}
+				<a href="#" on:click={() => setToken(menuItem)}>{menuItem.name}</a>
+			{/each}
+		</div>
 	</div>
 {/if}
 
 <style>
 	.tokenMenu {
 		background-color: antiquewhite;
-		height: 200px;
-		width: 85%;
+		height: 300px;
+		width: 90%;
 		overflow-y: auto;
 		list-style: none;
 		position: absolute;
-		top: 42px;
-		left: 34px;
+		top: 0px;
+		left: 5%;
 	}
 	.tokenMenu a {
 		color: black;
 		width: 100%;
 		text-decoration: none;
 		display: block;
-		padding-left: 5px;
+		padding-left: 10px;
 	}
 	.tokenMenu a:hover {
 		background-color: #ccc;
@@ -107,7 +126,7 @@
 		height: 100px;
 		padding-right: 5px;
 	}
-	.tokenInput:focus {
+	.focus {
 		border: 2px solid rgb(55, 187, 204);
 	}
 	.amount {
@@ -124,5 +143,22 @@
 	}
 	.amount::-webkit-inner-spin-button {
 		-webkit-appearance: none;
+	}
+	.menuBar {
+		background-color: rgba(21, 13, 51, 0.932);
+		display: flex;
+		width: 100%;
+	}
+	.menuBar p {
+		padding-left: 10px;
+	}
+	#closeButton {
+		background-color: orangered;
+		color: white;
+		margin: auto;
+		width: 25px;
+		height: 25px;
+		margin-right: 20px;
+		text-align: center;
 	}
 </style>

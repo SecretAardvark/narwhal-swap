@@ -10,6 +10,8 @@
 	let tokenOneAmount;
 	let tokenTwoAmount;
 
+	let settingsMenu = false;
+
 	const switchToken = () => {
 		let temp = tokenOne;
 		tokenOne = tokenTwo;
@@ -19,6 +21,8 @@
 	const fakeSwap = () => {
 		if (tokenOne == 'Select Token' || tokenTwo == 'Select Token') {
 			alert('Select token first');
+		} else if (tokenOneAmount <= 0 || tokenTwoAmount <= 0) {
+			alert('Amounts must be greater than 0');
 		} else {
 			alert(`Swapped ${tokenOneAmount} ${tokenOne} for ${tokenTwoAmount} ${tokenTwo}`);
 		}
@@ -32,9 +36,13 @@
 		<!-- inner div -->
 		<div id="swapTitle">
 			<p id="swap">Swap</p>
-			<p id="settingsIcon">{'<settings icon>'}</p>
+			<img src="/settings.svg" id="settingsIcon" on:click={() => (settingsMenu = !settingsMenu)} />
 		</div>
+
 		<div id="swapContents">
+			{#if settingsMenu}
+				<div class="settingsMenu"><h2>Hey look at all these fancy settings...</h2></div>
+			{/if}
 			<TokenDisplay bind:currentToken={tokenOne} bind:amount={tokenOneAmount} id="amount1" />
 
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -55,6 +63,16 @@
 <style>
 	.clr {
 		clear: both;
+	}
+	.settingsMenu {
+		background-color: antiquewhite;
+		height: 300px;
+		width: 90%;
+		overflow-y: auto;
+		list-style: none;
+		position: absolute;
+		top: 0px;
+		left: 5%;
 	}
 
 	#swapCard {
@@ -85,6 +103,7 @@
 		width: 100%;
 		margin: auto;
 	}
+
 	#swap {
 		color: rgb(55, 187, 204);
 		padding-left: 60px;
@@ -104,7 +123,8 @@
 		/* width: 100%; */
 	}
 	#settingsIcon {
-		/* float: right; */
+		float: right;
+		margin-right: 10px;
 		background-color: darkviolet;
 	}
 </style>

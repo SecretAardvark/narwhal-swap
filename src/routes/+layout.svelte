@@ -1,8 +1,9 @@
 <script src>
 	let title = 'Narwal Swap';
 
-	//TODO: Style popup token menu
-	//TODO: make outer tokenInput div border highlight when inner # input selected
+	//TODO: swap button needs to check amounts > 0
+	//TODO: refactor 'tokenMenu' popup into it's own component'
+	//TODO: change pointer icon on hover over token menu toggles, 'to' button, settings
 </script>
 
 <link rel="stylesheet" href="src\routes\styles.css" />

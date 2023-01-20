@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Source+Sans+Pro:wght@300&display=swap');
 body {
 	background-color: rgba(21, 13, 51, 0.932);
 	height: 100%;
@@ -12,7 +13,6 @@ main {
 	justify-content: center;
 	margin-top: 50px;
 }
-@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Source+Sans+Pro:wght@300&display=swap');
 
 :global(*) {
 	font-family: 'Roboto', sans-serif;
