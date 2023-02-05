@@ -156,9 +156,10 @@
 		background-color: orangered;
 		color: white;
 		margin: auto;
-		width: 25px;
+		width: 20px;
 		height: 25px;
 		margin-right: 20px;
-		text-align: center;
+		padding-left: 10px;
+		/* text-align: center; */
 	}
 </style>

@@ -1,7 +1,55 @@
 <script src>
-	let title = 'Narwal Swap';
+	import { onMount } from 'svelte';
+	import {
+		defaultEvmStores,
+		connected,
+		provider,
+		chainId,
+		//ChainData,
+		// signer,
+		signerAddress
+		// contracts
+	} from 'svelte-ethers-store';
+	//import { e } from 'vitest/dist/index-5aad25c1';
 
-	//TODO: swap button needs to check amounts > 0
+	let title = 'Narwal Swap';
+	let account;
+	/**
+	 * @type {string | any[]}
+	 */
+	let address;
+	let isConnected;
+	let currentNetwork;
+
+	let networks = [
+		{ name: 'ethereum', chainID: 1, ticker: 'eth' },
+		{ name: 'avalanche', chainID: 43114, ticker: 'avax' },
+		{ name: 'arbitrum', chainID: 42161, ticker: 'arb' },
+		{ name: 'polygon', chainID: 137, ticker: 'matic' },
+		{ name: 'optimism', chainID: 10, ticker: 'op' },
+		{ name: 'moonbeam', chainID: 1284, ticker: 'glmr' }
+	];
+
+	function getWallet() {
+		defaultEvmStores.setProvider();
+		provider.subscribe((v) => {
+			account = v;
+			address = $signerAddress;
+
+			networks.forEach((network) => {
+				if (network.chainID === $chainId) {
+					currentNetwork = network.ticker;
+				}
+			});
+			connected.subscribe((v) => {
+				isConnected = v;
+			});
+			// console.log(account);
+			// console.log(isConnected);
+		});
+	}
+	onMount(() => getWallet());
+
 	//TODO: refactor 'tokenMenu' popup into it's own component'
 	//TODO: change pointer icon on hover over token menu toggles, 'to' button, settings
 </script>
@@ -18,8 +66,17 @@
 	</span>
 	<input type="text" id="searchBar" />
 	<span id="wallet-info">
-		<button id="networkDisplay">Network</button>
-		<button id="connectButton">Address</button>
+		<button id="networkDisplay">{$chainId ? currentNetwork : `Network`}</button>
+		<button
+			id="connectButton"
+			on:click={() => {
+				console.log(connected);
+				!connected ? getWallet() : console.log('already connected');
+			}}
+			>{connected && typeof address == 'string'
+				? `${address.slice(0, 6)}.. ${address.slice(-4)}` //  `${$signerAddress.slice(0, 6)}..${$signerAddress.slice(-4)}`
+				: 'Address'}</button
+		>
 	</span>
 </header>
 
