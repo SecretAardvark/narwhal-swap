@@ -4,13 +4,14 @@
 		defaultEvmStores,
 		connected,
 		provider,
-		chainId,
-		//ChainData,
+		//chainId,
+		// @ts-ignore
+		chainData,
 		// signer,
 		signerAddress
 		// contracts
 	} from 'svelte-ethers-store';
-	//import { e } from 'vitest/dist/index-5aad25c1';
+	// import { BalanceP } from 'svelte-ethers-store/components';
 
 	let title = 'Narwal Swap';
 	let account;
@@ -19,39 +20,28 @@
 	 */
 	let address;
 	let isConnected;
-	let currentNetwork;
-
-	let networks = [
-		{ name: 'ethereum', chainID: 1, ticker: 'eth' },
-		{ name: 'avalanche', chainID: 43114, ticker: 'avax' },
-		{ name: 'arbitrum', chainID: 42161, ticker: 'arb' },
-		{ name: 'polygon', chainID: 137, ticker: 'matic' },
-		{ name: 'optimism', chainID: 10, ticker: 'op' },
-		{ name: 'moonbeam', chainID: 1284, ticker: 'glmr' }
-	];
-
 	function getWallet() {
 		defaultEvmStores.setProvider();
 		provider.subscribe((v) => {
 			account = v;
 			address = $signerAddress;
 
-			networks.forEach((network) => {
-				if (network.chainID === $chainId) {
-					currentNetwork = network.ticker;
-				}
-			});
 			connected.subscribe((v) => {
 				isConnected = v;
 			});
+			// console.log($chainData);
 			// console.log(account);
 			// console.log(isConnected);
 		});
 	}
 	onMount(() => getWallet());
 
-	//TODO: refactor 'tokenMenu' popup into it's own component'
+	//TODO: refactor 'tokenMenu' popup into it's own component
 	//TODO: change pointer icon on hover over token menu toggles, 'to' button, settings
+	//TODO: Make token page display erc 20 token balances (start with just eth)
+	//TODO: Next steps to make the app functional:
+	//TODO: 	-figure out why signing multiple messages in a row wasn't working.
+	//TODO: 	-connect to uniswap contracts on testnet
 </script>
 
 <link rel="stylesheet" href="src\routes\styles.css" />
@@ -66,7 +56,7 @@
 	</span>
 	<input type="text" id="searchBar" />
 	<span id="wallet-info">
-		<button id="networkDisplay">{$chainId ? currentNetwork : `Network`}</button>
+		<button id="networkDisplay">{$connected ? $chainData.nativeCurrency.symbol : `Network`}</button>
 		<button
 			id="connectButton"
 			on:click={() => {

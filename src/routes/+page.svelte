@@ -3,6 +3,16 @@
 
 	import './tokenDisplay.svelte';
 	import TokenDisplay from './tokenDisplay.svelte';
+	import {
+		defaultEvmStores,
+		connected,
+		provider,
+		chainId,
+		//ChainData,
+		signer,
+		signerAddress
+		// contracts
+	} from 'svelte-ethers-store';
 
 	let tokenOne;
 	let tokenTwo;
@@ -18,12 +28,16 @@
 		tokenTwo = temp;
 	};
 
-	const fakeSwap = () => {
+	const fakeSwap = async () => {
 		if (tokenOne == 'Select Token' || tokenTwo == 'Select Token') {
 			alert('Select token first');
 		} else if (tokenOneAmount <= 0 || tokenTwoAmount <= 0) {
 			alert('Amounts must be greater than 0');
 		} else {
+			// await $signer.signMessage(`Approve ${tokenOne} abd ${tokenTwo}`);
+			await $signer.signMessage(
+				`Swap ${tokenOneAmount} ${tokenOne} for ${tokenTwoAmount} ${tokenTwo}`
+			);
 			alert(`Swapped ${tokenOneAmount} ${tokenOne} for ${tokenTwoAmount} ${tokenTwo}`);
 		}
 	};
